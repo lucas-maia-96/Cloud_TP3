@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-dash
+  name: dashboard-deployment
   namespace: lucasmaia
 spec:
   replicas: 1
@@ -14,7 +14,7 @@ spec:
         app: dashboard
     spec:
       containers:
-        - name: dash-container
+        - name: dashboard-container
           image: cleifson/monitoring-dashboard:12
           ports:
             - containerPort: 52011

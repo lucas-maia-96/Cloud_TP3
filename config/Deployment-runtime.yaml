@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverless-runtime
+  namespace: lucasmaia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serverless-runtime
+  template:
+    metadata:
+      labels:
+        app: serverless-runtime
+    spec:
+      containers:
+        - name: runtime
+          image: cleifson/runtime:05 
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PYFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: pyfile
+                  key: pyfile
+            - name: REDIS_HOST
+              value: "192.168.121.187"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_INPUT_KEY
+              value: "metrics"
+            - name: REDIS_OUTPUT_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: outputkey
+                  key: REDIS_OUTPUT_KEY
+            - name: REDIS_MONITORING_PERIOD
+              value: "5"
+            - name: FUNCTION_ENTRY_POINT
+              value: "handler"
+            - name: ZIP_FILE_URL
+              value: "/mnt/shared/function.zip"
+          volumeMounts:
+            - name: pyfile-volume
+              mountPath: /app/pyfile-configmap.yaml
+              subPath: pyfile-configmap.yaml
+            - name: persistent-storage
+              mountPath: /mnt/shared
+      volumes:
+        - name: pyfile-volume
+          configMap:
+            name: pyfile
+        - name: persistent-storage
+          persistentVolumeClaim:
+            claimName: project2-pv2-lucasmaia-claim

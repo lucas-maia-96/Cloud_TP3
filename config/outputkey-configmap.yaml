@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  REDIS_OUTPUT_KEY: 2021040091-proj3-output
+kind: ConfigMap
+metadata:
+  name: outputkey
+  namespace: lucasmaia

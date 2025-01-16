@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tp3_luke
+spec:
+  destination:
+    name: ''
+    namespace: lucasmaia
+    server: https://kubernetes.default.svc
+  source:
+    path: config
+    repoURL: https://github.com/lucas-maia-96/Cloud_TP3.git
+    targetRevision: HEAD
+  sources: []
+  project: lucasmaia-project
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

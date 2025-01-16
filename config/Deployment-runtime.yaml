@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: serverless-runtime
+  name: serverless-runtime-lucas
   namespace: lucasmaia
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: serverless-runtime
+      app: serverless-runtime-lucas
   template:
     metadata:
       labels:
-        app: serverless-runtime
+        app: serverless-runtime-lucas
     spec:
       containers:
-        - name: runtime
+        - name: runtime-lucas
           image: cleifson/runtime:05 
           ports:
             - containerPort: 8080

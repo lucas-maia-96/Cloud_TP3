@@ -8,7 +8,7 @@ spec:
     app: dashboard
   ports:
     - protocol: TCP
-      port: 52011
-      targetPort: 52011
-      nodePort: 52011
+      port: 52046
+      targetPort: 52046
+      nodePort: 52046
   type: NodePort

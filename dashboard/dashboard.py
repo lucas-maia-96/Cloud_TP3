@@ -35,7 +35,7 @@ def process_metrics(metrics):
     return cpu_df, other_df
 
 def main():
-    os.environ["STREAMLIT_SERVER_PORT"] = "52011"
+    os.environ["STREAMLIT_SERVER_PORT"] = "52046"
 
     st.title("Dashboard de Monitoramento")
     st.markdown("Exibe métricas computadas pelo servidor.")

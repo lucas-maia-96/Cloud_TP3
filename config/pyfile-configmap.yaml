@@ -15,7 +15,8 @@ data:
         moving_averages = env.get("moving_averages", {})
 
         # Dados de entrada com verificação de presença das chaves
-        cpu_utilizations = [value for key, value in input.items() if key.startswith("cpu_percent-")]
+        prefix = "cpu_percent-"
+        cpu_utilizations = [(key[len(prefix):],value) for key, value in input.items() if key.startswith(prefix)]
         cached = input.get("virtual_memory-cached", 0)
         buffers = input.get("virtual_memory-buffers", 0)
         total_memory = input.get("virtual_memory-total", 1)
@@ -27,12 +28,12 @@ data:
         percent_memory_cache = (cached + buffers) / total_memory * 100 if total_memory > 0 else 0
 
         # Calcula a média móvel por CPU
-        for idx, utilization in enumerate(cpu_utilizations):
-            key = f"avg-util-cpu{idx + 1}-60sec"
+        for utilization in cpu_utilizations:
+            key = f"avg-util-cpu{utilization[0]}-60sec"
             if key in moving_averages:
-                moving_averages[key] = (moving_averages[key] * 59 + utilization) / 60
+                moving_averages[key] = (moving_averages[key] * 59 + utilization[1]) / 60
             else:
-                moving_averages[key] = utilization
+                moving_averages[key] = utilization[1]
 
         # Atualiza o contexto com as médias móveis
         env["moving_averages"] = moving_averages

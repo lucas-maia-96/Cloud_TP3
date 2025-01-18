@@ -20,8 +20,8 @@ data:
         cached = input.get("virtual_memory-cached", 0)
         buffers = input.get("virtual_memory-buffers", 0)
         total_memory = input.get("virtual_memory-total", 1)
-        bytes_sent = input.get("net_io_counters_eth0-bytes_sent1", 0)
-        bytes_recv = input.get("net_io_counters_eth0-bytes_recv1", 0)
+        bytes_sent = input.get("net_io_counters_eth0-bytes_sent", 0)
+        bytes_recv = input.get("net_io_counters_eth0-bytes_recv", 0)
 
         # Calcula métricas
         percent_network_egress = (bytes_sent / (bytes_sent + bytes_recv) * 100) if (bytes_sent + bytes_recv) > 0 else 0

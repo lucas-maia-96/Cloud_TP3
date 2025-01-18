@@ -29,11 +29,15 @@ data:
 
         # Calcula a média móvel por CPU
         for utilization in cpu_utilizations:
-            key = f"avg-util-cpu{utilization[0]}-60sec"
+            key = f"60s-avg-util-cpu{utilization[0]}"
             if key in moving_averages:
                 moving_averages[key] = (moving_averages[key] * 59 + utilization[1]) / 60
             else:
                 moving_averages[key] = utilization[1]
+        
+        for utilization in cpu_utilizations:
+            key = f"util-cpu{utilization[0]}"
+            moving_averages[key] = utilization[1]
 
         # Atualiza o contexto com as médias móveis
         env["moving_averages"] = moving_averages

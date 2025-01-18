@@ -80,14 +80,14 @@ def main():
                 col1, col2 = st.columns(2)
 
                 with col1:
-                        if "percent-memory-cache" in m:
-                            memory_metric = f"{m['percent-memory-cache']:.2f} %"
+                        if "percent-memory-cache" in metrics:
+                            memory_metric = f"{metrics['percent-memory-cache']:.2f} %"
                             st.subheader("Percentage of Memory Caching Content")
                             st.metric(label="Uso de Memória Cache", value=memory_metric, border=True, label_visibility="collapsed")
                     
                 with col2:
-                    if "percent-network-egress" in m:
-                        network_metric = f"{m['percent-network-egress']:.2f} %"
+                    if "percent-network-egress" in metrics:
+                        network_metric = f"{metrics['percent-network-egress']:.2f} %"
                         st.subheader("Percentage of Outgoing Traffic Bytes")
                         st.metric(label="Uso de Rede", value=network_metric, border=True, label_visibility="collapsed")
 

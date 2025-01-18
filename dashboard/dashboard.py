@@ -5,6 +5,7 @@ import os
 import time
 import pandas as pd
 import numpy as np
+import re
 
 def extract_cpu(input_string): 
     match = re.search(r"cpu\d+", input_string)  # Matches "cpu" followed by one or more digits

@@ -25,7 +25,7 @@ data:
 
         # Calcula métricas
         percent_network_egress = (float(bytes_sent) / (bytes_sent + bytes_recv) * 100) if (bytes_sent + bytes_recv) > 0 else 0
-        percent_memory_cache = (cached + buffers) / total_memory * 100 if total_memory > 0 else 0
+        percent_memory_cache = float((cached + buffers)) / total_memory * 100 if total_memory > 0 else 0
 
         # Calcula a média móvel por CPU
         for utilization in cpu_utilizations:

@@ -79,20 +79,21 @@ def main():
                 
 
                 col1, col2 = st.columns(2)
+                cpu_df, other_df = process_metrics(metrics)
 
                 with col1:
-                        if "percent-memory-cache" in metrics:
-                            memory_metric = f"{metrics['percent-memory-cache']:.2f} %"
+                        if "percent-memory-cache" in other_df.values:
+                            memory_metric = f"{other_df.loc[other_df['Métrica'] == 'percent-memory-cache', 'Valor'].values[0]:.2f} %"
                             st.subheader("Percentage of Memory Caching Content")
                             st.metric(label="Uso de Memória Cache", value=memory_metric, border=True, label_visibility="collapsed")
                     
                 with col2:
-                    if "percent-network-egress" in metrics:
-                        network_metric = f"{metrics['percent-network-egress']:.2f} %"
+                    if "percent-network-egress" in other_df.values:
+                        network_metric = f"{other_df.loc[other_df['Métrica'] == 'percent-network-egress', 'Valor'].values[0]:.2f} %"
                         st.subheader("Percentage of Outgoing Traffic Bytes")
                         st.metric(label="Uso de Rede", value=network_metric, border=True, label_visibility="collapsed")
 
-                cpu_df, other_df = process_metrics(metrics)
+                
                 cpu_df["CPU"] = cpu_df["CPU"].str.extract(r"(\d+)").astype(int)
                 cpu_df = cpu_df.sort_values("CPU")
 

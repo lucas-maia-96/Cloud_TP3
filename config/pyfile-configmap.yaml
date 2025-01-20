@@ -24,7 +24,7 @@ data:
         bytes_recv = input.get("net_io_counters_eth0-bytes_recv", 0)
 
         # Calcula métricas
-        percent_network_egress = (bytes_sent / (bytes_sent + bytes_recv) * 100) if (bytes_sent + bytes_recv) > 0 else 0
+        percent_network_egress = (float(bytes_sent) / (bytes_sent + bytes_recv) * 100) if (bytes_sent + bytes_recv) > 0 else 0
         percent_memory_cache = (cached + buffers) / total_memory * 100 if total_memory > 0 else 0
 
         # Calcula a média móvel por CPU

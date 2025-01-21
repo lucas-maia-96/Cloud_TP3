@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: dashboard-container
-          image: lucasmaia96/dashboard-monitoramento:6
+          image: lucasmaia96/dashboard-monitoramento:7
           ports:
             - containerPort: 52046
           env:

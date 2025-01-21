@@ -84,13 +84,13 @@ def main():
                 with col1:
                         if "percent-memory-cache" in other_df.values:
                             memory_metric = f"{other_df.loc[other_df['Métrica'] == 'percent-memory-cache', 'Valor'].values[0]:.2f} %"
-                            st.subheader("Percentage of Memory Caching Content")
+                            st.subheader("Conteúdo em Cache na Memória (%)")
                             st.metric(label="Uso de Memória Cache", value=memory_metric, border=True, label_visibility="collapsed")
                     
                 with col2:
                     if "percent-network-egress" in other_df.values:
                         network_metric = f"{other_df.loc[other_df['Métrica'] == 'percent-network-egress', 'Valor'].values[0]:.2f} %"
-                        st.subheader("Percentage of Outgoing Traffic Bytes")
+                        st.subheader("Bytes de Tráfego de Saída (%)")
                         st.metric(label="Uso de Rede", value=network_metric, border=True, label_visibility="collapsed")
 
                 
